@@ -1,0 +1,36 @@
+base:
+  # 存在する特徴量だとしても上書きするか
+  overwrite: True
+  seed: 1234
+  n_folds: 4
+  # optunaを使うかどうか
+  optuna: true
+  num_boost_round: 1500
+
+# LightGBMのパラメータ
+parameters:
+  objective: "multiclass"
+  num_class: 9
+  max_depth: 8
+  learning_rate: .01
+  metric: "rmse"
+  num_leaves: 31
+  verbose: -1
+
+# trainingに使用する特徴量
+features: [
+  "base_data",
+  "is_same_state",
+  "loan_processing_period",
+  "loanvs_approved_amount_difference",
+  "s_b_a_guarantee_ratio",
+  "years_since_approval",
+  "is_franchise",
+  "jobs_created_per_employee",
+  "jobs_retained_per_employee",
+  "loan_amount_per_employee",
+  "bank_state_count",
+  "city_count",
+  "sector_count",
+  "state_count",
+]

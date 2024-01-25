@@ -1,0 +1,10 @@
+/features/*.pkl
+/src/mlruns/
+/outputs/
+/data/
+/catboost_info/
+/src/wandb/
+/History/
+/src/catboost_info/
+/src/model/tabnet
+/src/outputs/
