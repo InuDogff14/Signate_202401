@@ -68,7 +68,7 @@ def createfeatures(data,cat_feature):
     return data
 
 
-
+@git_commits(rand)
 def run(cfg):
     cwd = Path(hydra.utils.get_original_cwd())
 
