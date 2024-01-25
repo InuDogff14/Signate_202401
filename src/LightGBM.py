@@ -72,9 +72,8 @@ def createfeatures(data,cat_feature):
 def run(cfg):
     cwd = Path(hydra.utils.get_original_cwd())
 
-    file_path = 'config/config.yaml'
+    file_path = "../../../config/config.yaml" 
 
-    print("Current Directory:", os.getcwd())
     
     # ファイルを開いて内容を読み込む
     with open(file_path, 'r', encoding='utf-8') as file:
