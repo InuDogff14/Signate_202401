@@ -77,10 +77,10 @@ def run(cfg):
     
     # ファイルを開いて内容を読み込む
     with open(file_path, 'r', encoding='utf-8') as file:
-        yaml = yaml.safe_load(file)
+        temp = yaml.safe_load(file)
 
     # featuresリストを取得
-    features = yaml.get('features', [])
+    features = temp.get('features', [])
 
     data = [pd.read_pickle(f"../features/{f}.pkl") for f in features]
     data = pd.concat(data, axis=1)
