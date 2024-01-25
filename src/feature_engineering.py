@@ -1,3 +1,6 @@
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 from utils import Feature, generate_features, create_memo
 from preprocess import base_data
 import numpy as np
@@ -9,7 +12,7 @@ from math import radians, cos, sin, asin, sqrt
 
 
 # 生成された特徴量を保存するパス
-Feature.dir = "../features"
+Feature.dir = "features"
 # trainとtestを結合して基本的な前処理を行ったデータを呼ぶ
 data = base_data()
 
@@ -124,6 +127,21 @@ class SectorCount(Feature):
         create_memo('SectorCount','SectorのCount')
 
 
+class LoanToValueRatio(Feature):
+    def create_features(self):
+        temp = data['DisbursementGross'] / data['GrAppv']
+        df = temp.to_frame(name='LoanToValueRatio')
+        self.data = df.copy()
+        create_memo('LoanToValueRatio','DisbursementGross（支払総額）とGrAppv（承認額）の比率。これは融資額が承認額に対してどれくらいの比率であるかを示します。')
+
+
+class BusinessAgeAtDisbursement(Feature):
+    def create_features(self):
+        # Convert DisbursementDate to datetime
+        data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], errors='coerce')
+        # Assuming new businesses have an age of 0 and existing businesses have an age of 1 or more
+        temp = data['NewExist'].apply(lambda x: 0 if x == 1 else 1)
+        df = temp.to_
 @hydra.main(config_name="../config/config.yaml")
 def run(cfg):
     print(cfg)

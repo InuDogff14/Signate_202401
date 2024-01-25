@@ -85,6 +85,22 @@ def run(cfg):
     data = [pd.read_pickle(f"../../../features/{f}.pkl") for f in features]
     data = pd.concat(data, axis=1)
     
+    data['Spring'] = data['ApprovalMonth'].isin([3, 4, 5]).astype(int)
+    data['Summer'] = data['ApprovalMonth'].isin([6, 7, 8]).astype(int)
+    data['Autumn'] = data['ApprovalMonth'].isin([9, 10, 11]).astype(int)
+    data['Winter'] = data['ApprovalMonth'].isin([12, 1, 2]).astype(int)
+
+    
+    # Calculate the count of urban and rural businesses in each state
+    urban_rural_counts = data.groupby(['State', 'UrbanRural']).size().unstack(fill_value=0)
+
+    # Calculate the ratio of urban to rural businesses in each state
+    urban_rural_counts['UrbanRuralBusinessRatio'] = urban_rural_counts[1] / (urban_rural_counts[0] + urban_rural_counts[1])
+    urban_rural_counts = urban_rural_counts['UrbanRuralBusinessRatio']
+
+    # Merge this ratio back into the original dataframe
+    data = data.merge(urban_rural_counts, on='State', how='left')
+    
     # Handle possible division by zero
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
 
