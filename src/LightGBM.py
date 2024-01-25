@@ -71,7 +71,16 @@ def createfeatures(data,cat_feature):
 def run(cfg):
     cwd = Path(hydra.utils.get_original_cwd())
 
-    data = [pd.read_pickle(cwd / f"../features/{f}.pkl") for f in cfg.features]
+    file_path = '../config/config.yaml'
+
+    # ファイルを開いて内容を読み込む
+    with open(file_path, 'r', encoding='utf-8') as file:
+        yaml = yaml.safe_load(file)
+
+    # featuresリストを取得
+    features = yaml.get('features', [])
+
+    data = [pd.read_pickle(f"../features/{f}.pkl") for f in features]
     data = pd.concat(data, axis=1)
     
     # Handle possible division by zero
