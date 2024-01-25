@@ -33,4 +33,5 @@ features: [
   "city_count",
   "sector_count",
   "state_count",
+  "loan_to_value_ratio",
 ]

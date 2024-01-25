@@ -135,13 +135,13 @@ class LoanToValueRatio(Feature):
         create_memo('LoanToValueRatio','DisbursementGross（支払総額）とGrAppv（承認額）の比率。これは融資額が承認額に対してどれくらいの比率であるかを示します。')
 
 
-class BusinessAgeAtDisbursement(Feature):
-    def create_features(self):
-        # Convert DisbursementDate to datetime
-        data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], errors='coerce')
-        # Assuming new businesses have an age of 0 and existing businesses have an age of 1 or more
-        temp = data['NewExist'].apply(lambda x: 0 if x == 1 else 1)
-        df = temp.to_
+# class BusinessAgeAtDisbursement(Feature):
+#     def create_features(self):
+#         # Convert DisbursementDate to datetime
+#         data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], errors='coerce')
+#         # Assuming new businesses have an age of 0 and existing businesses have an age of 1 or more
+#         temp = data['NewExist'].apply(lambda x: 0 if x == 1 else 1)
+#         df = temp.to_
 @hydra.main(config_name="../config/config.yaml")
 def run(cfg):
     print(cfg)
