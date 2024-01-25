@@ -228,8 +228,8 @@ def run(cfg):
     test_csv = test[['ID', 'lgb_preds']]
 
     # CSVファイルに保存
-    train_csv_path = '../data/train_lgb_predictions2.csv'
-    test_csv_path = '../data/test_lgb_predictions2.csv'
+    train_csv_path = '../../../data/train_lgb_predictions2.csv'
+    test_csv_path = '../../../data/test_lgb_predictions2.csv'
 
     train_csv.to_csv(train_csv_path, index=False)
     test_csv.to_csv(test_csv_path, index=False)
@@ -347,12 +347,12 @@ def run(cfg):
     print(f"0の割合: {zeros * 100:.2f}%")
     print(f"1の割合: {ones * 100:.2f}%")
     
-    submit = pd.read_csv('../data/sample_submission.csv', header=None)
+    submit = pd.read_csv('../../../data/sample_submission.csv', header=None)
 
     submit.iloc[:, 1] = y_pred_threshold
     filename = 'lgb_base'
 
-    submit.to_csv(f'../outputs/{rand}.csv', index=False,header=None)
+    submit.to_csv(f'../../../outputs/{rand}.csv', index=False,header=None)
     
     # 特徴量の重要度を取得
     importance = lgb_clf.feature_importances_
