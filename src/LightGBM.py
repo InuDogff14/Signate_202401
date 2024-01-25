@@ -82,7 +82,7 @@ def run(cfg):
     # featuresリストを取得
     features = temp.get('features', [])
 
-    data = [pd.read_pickle(f"../features/{f}.pkl") for f in features]
+    data = [pd.read_pickle(f"../../../features/{f}.pkl") for f in features]
     data = pd.concat(data, axis=1)
     
     # Handle possible division by zero
