@@ -25,7 +25,6 @@ def preprocess(train, test):
     data['DisbursementDay'] = data['DisbursementDate'].dt.day
 
     data['ApprovalDate'] = pd.to_datetime(data['ApprovalDate'], format='%d-%b-%y')
-    data['ApprovalYear'] = data['ApprovalDate'].dt.year
     data['ApprovalMonth'] = data['ApprovalDate'].dt.month
     data['ApprovalDay'] = data['ApprovalDate'].dt.day
 

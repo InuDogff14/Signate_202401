@@ -135,6 +135,22 @@ class LoanToValueRatio(Feature):
         create_memo('LoanToValueRatio','DisbursementGross（支払総額）とGrAppv（承認額）の比率。これは融資額が承認額に対してどれくらいの比率であるかを示します。')
 
 
+class RealEstate(Feature):
+    def create_features(self):
+        temp = np.where(data['Term'] >= 240, 1, 0)
+        df = pd.DataFrame(temp, columns=['RealEstate'])
+        self.data = df.copy()
+        create_memo('RealEstate','不動産担保ローン（期間20年以上）かどうか')
+
+
+class GreatRecession(Feature):
+    def create_features(self):
+        temp =  np.where(((2007 <= data['DisbursementYear']) & (data['DisbursementYear'] <= 2009)) | 
+                                     ((data['DisbursementYear'] < 2007) & (data['DisbursementYear'] + (data['Term']/12) >= 2007)), 1, 0)
+        df = pd.DataFrame(temp, columns=['GreatRecession'])
+        self.data = df.copy()
+        create_memo('GreatRecession','不況の時期(2007～2009年)に活発だったかどうか')
+
 # class BusinessAgeAtDisbursement(Feature):
 #     def create_features(self):
 #         # Convert DisbursementDate to datetime
