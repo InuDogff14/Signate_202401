@@ -34,4 +34,6 @@ features: [
   "sector_count",
   "state_count",
   "loan_to_value_ratio",
+  "real_estate",
+  "great_recession",
 ]

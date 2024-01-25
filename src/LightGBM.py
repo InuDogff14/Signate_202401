@@ -182,7 +182,6 @@ def run(cfg):
     category_features = ['State','BankState', 'Sector',  'NewExist','UrbanRural','RevLineCr', 'LowDoc','IsSameState','Term_Cluster']
 
 
-
     for col in category_features:
         X = train[col]
         test_X = test[col]
@@ -199,7 +198,7 @@ def run(cfg):
 
         train = train.drop([col],axis=1)
         test = test.drop([col],axis=1)
-        
+
     train = train.drop('City',axis=1)
     test = test.drop('City',axis=1)
 
