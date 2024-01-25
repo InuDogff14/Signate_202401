@@ -17,6 +17,14 @@ def preprocess(train, test):
     ]).reset_index(drop=True)
 
     data.rename(columns={'Unnamed: 0': 'ID'}, inplace=True)
+    
+    # Remove records where RevLineCr != 'Y' or 'N' and LowDoc != 'Y' or 'N'
+    data = data[(data['RevLineCr'] == 'Y') | (data['RevLineCr'] == 'N')]
+    data = data[(data['LowDoc'] == 'Y') | (data['LowDoc'] == 'N')]
+
+    # RevLineCr and LowDoc: 0 = No, 1 = Yes
+    data['RevLineCr'] = np.where(data['RevLineCr'] == 'N', 0, 1)
+    data['LowDoc'] = np.where(data['LowDoc'] == 'N', 0, 1)
 
     # 'DisbursementDate'列を日付形式に変換
     data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], format='%d-%b-%y')

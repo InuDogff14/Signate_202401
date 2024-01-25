@@ -29,3 +29,4 @@ SectorCount,SectorのCount
 LoanToValueRatio,DisbursementGross（支払総額）とGrAppv（承認額）の比率。これは融資額が承認額に対してどれくらいの比率であるかを示します。
 RealEstate,不動産担保ローン（期間20年以上）かどうか
 GreatRecession,不況の時期(2007～2009年)に活発だったかどうか
+AppvDisbursed,承認された金額と実行されたローンの金額が等しいかどうか

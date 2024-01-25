@@ -151,6 +151,16 @@ class GreatRecession(Feature):
         self.data = df.copy()
         create_memo('GreatRecession','不況の時期(2007～2009年)に活発だったかどうか')
 
+
+class AppvDisbursed(Feature):
+    def create_features(self):
+        temp = np.where(data['DisbursementGross'] == data['GrAppv'], 1, 0)
+        df = pd.DataFrame(temp,columns=['AppvDisbursed'])
+        self.data = df.copy()
+        create_memo('AppvDisbursed','承認された金額と実行されたローンの金額が等しいかどうか')
+
+
+
 # class BusinessAgeAtDisbursement(Feature):
 #     def create_features(self):
 #         # Convert DisbursementDate to datetime
