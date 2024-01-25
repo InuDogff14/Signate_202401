@@ -25,6 +25,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 from utils import git_commits
 from category_encoders import CatBoostEncoder
 from sklearn.model_selection import KFold
+import os
 
 rand = np.random.randint(0, 1000000)
 warnings.filterwarnings('ignore')
@@ -73,6 +74,8 @@ def run(cfg):
 
     file_path = 'config/config.yaml'
 
+    print("Current Directory:", os.getcwd())
+    
     # ファイルを開いて内容を読み込む
     with open(file_path, 'r', encoding='utf-8') as file:
         yaml = yaml.safe_load(file)
