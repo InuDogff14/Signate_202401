@@ -179,7 +179,30 @@ def run(cfg):
     # 訓練データでフィットさせたGMMを使用してクラスタ割り当てを予測
     test['Term_Cluster'] = gmm.predict(X_test_scaled)
     
-    category_features = ['State','BankState', 'Sector',  'NewExist','UrbanRural','RevLineCr', 'LowDoc','IsSameState','Term_Cluster']
+    category_features = [
+    'State',
+    'BankState', 
+    'Sector',  
+    'NewExist',
+    'UrbanRural',
+    'RevLineCr', 
+    'LowDoc',
+    'FranchiseFlag',
+    'IsSameState',
+    'Term_Cluster',
+    'Spring',
+    'Summer',
+    'Autumn',
+    'Winter',
+    'BankStateCount',
+    'CityCount',
+    'SectorCount',
+    'StateCount',
+    'RealEstate',
+    'GreatRecession',
+    'AppvDisbursed',
+    
+    ]
 
 
     for col in category_features:
