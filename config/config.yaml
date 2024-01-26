@@ -36,4 +36,5 @@ features: [
   "loan_to_value_ratio",
   "real_estate",
   "great_recession",
+  "appv_disbursed",
 ]

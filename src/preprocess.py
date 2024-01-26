@@ -18,14 +18,38 @@ def preprocess(train, test):
 
     data.rename(columns={'Unnamed: 0': 'ID'}, inplace=True)
     
-    # Remove records where RevLineCr != 'Y' or 'N' and LowDoc != 'Y' or 'N'
-    data = data[(data['RevLineCr'] == 'Y') | (data['RevLineCr'] == 'N')]
-    data = data[(data['LowDoc'] == 'Y') | (data['LowDoc'] == 'N')]
-
-    # RevLineCr and LowDoc: 0 = No, 1 = Yes
-    data['RevLineCr'] = np.where(data['RevLineCr'] == 'N', 0, 1)
-    data['LowDoc'] = np.where(data['LowDoc'] == 'N', 0, 1)
-
+    data['Sector'] = data['Sector'].astype('str')
+    data['Sector'] = data['Sector'].map({
+    '11': 'Ag/For/Fish/Hunt',
+    '21': 'Min/Quar/Oil_Gas_ext',
+    '22': 'Utilities',
+    '23': 'Construction',
+    '31': 'Manufacturing',
+    '32': 'Manufacturing',
+    '33': 'Manufacturing',
+    '42': 'Wholesale_trade',
+    '44': 'Retail_trade',
+    '45': 'Retail_trade',
+    '48': 'Trans/Ware',
+    '49': 'Trans/Ware',
+    '51': 'Information',
+    '52': 'Finance/Insurance',
+    '53': 'RE/Rental/Lease',
+    '54': 'Prof/Science/Tech',
+    '55': 'Mgmt_comp',
+    '56': 'Admin_sup/Waste_Mgmt_Rem',
+    '61': 'Educational',
+    '62': 'Healthcare/Social_assist',
+    '71': 'Arts/Entertain/Rec',
+    '72': 'Accom/Food_serv',
+    '81': 'Other_no_pub',
+    '92': 'Public_Admin',
+    '0': 'Other',
+    })
+    
+    data.loc[(data['NewExist'] == 1), 'NewBusiness'] = 0
+    data.loc[(data['NewExist'] == 2), 'NewBusiness'] = 1
+    
     # 'DisbursementDate'列を日付形式に変換
     data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], format='%d-%b-%y')
     data['DisbursementYear'] = data['DisbursementDate'].dt.year
