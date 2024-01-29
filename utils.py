@@ -146,7 +146,7 @@ def git_commits(rand):
             my_func(*args, **kwargs)
 
         repo.index.commit(f"{rand}(after running)")
-        repo.git.push('origin', 'master')
+        repo.git.push('origin', 'main')
         return decorator_wrapper
 
     return func_decorator
