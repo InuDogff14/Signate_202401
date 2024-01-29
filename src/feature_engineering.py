@@ -160,14 +160,14 @@ class AppvDisbursed(Feature):
         create_memo('AppvDisbursed','承認された金額と実行されたローンの金額が等しいかどうか')
 
 
+class RatioOfJobsCreatedToJobsRetained(Feature):
+    def create_features(self):
+        temp = data['CreateJob'] / data['RetainedJob'].replace(0, np.nan)
+        df = temp.to_frame(name = 'RatioOfJobsCreatedToJobsRetained')
+        self.data = df.copy()
+        create_memo('RatioOfJobsCreatedToJobsRetained', '作成された仕事の数と維持された仕事の数の比率。')
 
-# class BusinessAgeAtDisbursement(Feature):
-#     def create_features(self):
-#         # Convert DisbursementDate to datetime
-#         data['DisbursementDate'] = pd.to_datetime(data['DisbursementDate'], errors='coerce')
-#         # Assuming new businesses have an age of 0 and existing businesses have an age of 1 or more
-#         temp = data['NewExist'].apply(lambda x: 0 if x == 1 else 1)
-#         df = temp.to_
+
 @hydra.main(config_name="../config/config.yaml")
 def run(cfg):
     print(cfg)

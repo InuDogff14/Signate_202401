@@ -1,6 +1,6 @@
 base:
   # 存在する特徴量だとしても上書きするか
-  overwrite: True
+  overwrite: False
   seed: 1234
   n_folds: 4
   # optunaを使うかどうか
@@ -25,16 +25,12 @@ features: [
   "loanvs_approved_amount_difference",
   "s_b_a_guarantee_ratio",
   "years_since_approval",
-  "is_franchise",
   "jobs_created_per_employee",
   "jobs_retained_per_employee",
   "loan_amount_per_employee",
-  "bank_state_count",
-  "city_count",
-  "sector_count",
-  "state_count",
   "loan_to_value_ratio",
   "real_estate",
   "great_recession",
   "appv_disbursed",
+  "ratio_of_jobs_created_to_jobs_retained",
 ]
